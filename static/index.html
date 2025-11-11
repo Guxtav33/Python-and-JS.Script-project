@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Pokedex</title>
+  <link rel="icon" type="image/png"
+    href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/1026px-Pok%C3%A9_Ball_icon.svg.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+  <section class="pokedex-container">
+    <!-- Ícone fixo e título -->
+    <img
+      src="https://cdn.dribbble.com/userupload/22333011/file/original-688a28dafe92965cf0a56141591fd446.png?format=webp&resize=400x300&vertical=center"
+      alt="Das Icon" class="fixed-icon" />
+    <h1 class="fixed-title">Gustavo.dex</h1>
+
+    <!-- Tela principal -->
+    <div class="main-screen" id="mainScreen">
+      <div class="boot-text" id="bootText">SYSTEM OFFLINE</div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="Pikachu"
+        class="pokemon-image hidden" id="pokemonImage" />
+    </div>
+
+    <!-- Caixa de pesquisa -->
+    <div class="search-box">
+      <input type="text" placeholder="Digite o nome do Pokémon..." id="pokemonName">
+    </div>
+
+    <!-- Caixa de descrição -->
+    <div class="description-box" id="descBox">
+      <p><strong>Pikachu</strong> — Tipo: Elétrico ⚡<br>
+        Pokémon rato elétrico que armazena energia nas bochechas.</p>
+    </div>
+
+    <!-- Barra de informações -->
+    <div class="info-bar" id="infoBar">
+      <span>#025</span>
+      <span>Nível: 12</span>
+      <span>HP: 45</span>
+    </div>
+
+    <!-- Botões de controle -->
+    <div class="control-buttons">
+      <div class="power-section">
+        <button class="btn power-btn on-btn">ON</button>
+        <button class="btn power-btn off-btn">OFF</button>
+      </div>
+
+      <div class="action-section">
+        <button class="btn search-btn">SEARCH</button>
+      </div>
+
+      <div class="horizontal-buttons">
+        <button class="btn arrow left"></button>
+        <button class="btn arrow right"></button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const onBtn = document.querySelector('.on-btn');
+    const offBtn = document.querySelector('.off-btn');
+    const mainScreen = document.getElementById('mainScreen');
+    const bootText = document.getElementById('bootText');
+    const pokemonImage = document.getElementById('pokemonImage');
+    const descBox = document.getElementById('descBox');
+    const infoBar = document.getElementById('infoBar');
+
+    // Função de ligar com animação
+    onBtn.addEventListener('click', () => {
+      mainScreen.style.backgroundColor = '#fff';
+      bootText.textContent = 'BOOTING...';
+      bootText.style.display = 'block';
+      pokemonImage.classList.add('hidden');
+      descBox.style.opacity = '0.3';
+      infoBar.style.opacity = '0.3';
+
+      setTimeout(() => {
+        bootText.textContent = 'LOADING DATABASE...';
+      }, 1000);
+
+      setTimeout(() => {
+        bootText.textContent = 'INITIALIZING INTERFACE...';
+      }, 2000);
+
+      setTimeout(() => {
+        bootText.style.display = 'none';
+        pokemonImage.classList.remove('hidden');
+        descBox.style.opacity = '1';
+        infoBar.style.opacity = '1';
+      }, 3000);
+    });
+
+    // Função de desligar
+    offBtn.addEventListener('click', () => {
+      mainScreen.style.backgroundColor = '#111';
+      pokemonImage.classList.add('hidden');
+      bootText.textContent = 'SYSTEM OFFLINE';
+      bootText.style.display = 'block';
+      descBox.style.opacity = '0.3';
+      infoBar.style.opacity = '0.3';
+    });
+  </script>
+</body>
+
+</html>
