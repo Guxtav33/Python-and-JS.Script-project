@@ -1,11 +1,16 @@
 body {
-  background-color: #2c3e50;
+  background-color: #000; /* começa desligado */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
   font-family: 'Orbitron', sans-serif;
+  transition: background-color 1s ease;
+}
+
+body.on {
+  background-color: #2c3e50; /* muda ao ligar */
 }
 
 /* --- CONTAINER PRINCIPAL --- */
@@ -56,15 +61,24 @@ body {
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
-
-  /* 🔥 FUNDO PERSONALIZADO */
   background-image: url('https://wallpapercave.com/wp/wp8813120.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
+/* Efeito ligar/desligar */
+.screen-off {
+  filter: brightness(0);
+  transition: filter 0.8s ease;
+}
 
+.screen-on {
+  filter: brightness(1);
+  transition: filter 1s ease;
+}
+
+/* --- TEXTO DE BOOT --- */
 .boot-text {
   color: #00ff66;
   font-size: 18px;
@@ -75,21 +89,17 @@ body {
 }
 
 @keyframes blink {
-  50% {
-    opacity: 0.3;
-  }
+  50% { opacity: 0.3; }
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 .pokemon-image {
   max-width: 60%;
   height: auto;
 }
 
-/* --- CAIXA DE PESQUISA --- */
+/* --- CAIXAS E BOTÕES --- */
 .search-box {
   display: flex;
   gap: 10px;
@@ -108,11 +118,8 @@ body {
   outline: none;
 }
 
-.search-box input:focus {
-  border-color: #2980b9;
-}
+.search-box input:focus { border-color: #2980b9; }
 
-/* --- CAIXA DE DESCRIÇÃO --- */
 .description-box {
   background-color: #90ee90;
   border: 5px solid #38761d;
@@ -126,7 +133,6 @@ body {
   transition: opacity 0.4s ease;
 }
 
-/* --- BARRA DE INFO --- */
 .info-bar {
   width: 85%;
   display: flex;
@@ -150,14 +156,8 @@ body {
   margin-bottom: 10px;
 }
 
-.power-section {
-  display: flex;
-  gap: 15px;
-}
-
-.action-section {
-  margin-top: 5px;
-}
+.power-section { display: flex; gap: 15px; }
+.action-section { margin-top: 5px; }
 
 .horizontal-buttons {
   display: flex;
@@ -166,7 +166,6 @@ body {
   gap: 40px;
 }
 
-/* --- BOTÕES GERAIS --- */
 .btn {
   width: 60px;
   height: 60px;
@@ -181,11 +180,8 @@ body {
   font-size: 14px;
 }
 
-.btn:active {
-  transform: translateY(2px);
-}
+.btn:active { transform: translateY(2px); }
 
-/* --- POWER ON/OFF --- */
 .power-btn {
   background-color: #b22222;
   border: 3px solid #6b0d0d;
@@ -204,7 +200,6 @@ body {
   color: #ffe6e6;
 }
 
-/* --- SEARCH BUTTON --- */
 .search-btn {
   width: 100px;
   height: 40px;
@@ -218,14 +213,9 @@ body {
   box-shadow: 0 3px #000000;
 }
 
-.search-btn:active {
-  background-color: #2c3e50;
-}
+.search-btn:active { background-color: #2c3e50; }
 
-/* --- CORREÇÃO DAS SETAS --- */
-.arrow {
-  position: relative;
-}
+.arrow { position: relative; }
 
 .arrow::before {
   content: '';
@@ -246,3 +236,30 @@ body {
   border-color: transparent transparent transparent white;
 }
 
+/* ======== ANIMAÇÕES ======== */
+@keyframes hologramOut {
+  0% { opacity: 1; filter: brightness(1) hue-rotate(0deg); transform: scale(1); }
+  50% { opacity: 0.2; filter: brightness(3) hue-rotate(90deg); transform: scale(1.05); }
+  100% { opacity: 0; filter: brightness(0) hue-rotate(180deg); transform: scale(0.9); }
+}
+
+@keyframes hologramIn {
+  0% { opacity: 0; filter: brightness(0) hue-rotate(180deg); transform: scale(0.9); }
+  50% { opacity: 0.6; filter: brightness(3) hue-rotate(90deg); transform: scale(1.05); }
+  100% { opacity: 1; filter: brightness(1) hue-rotate(0deg); transform: scale(1); }
+}
+
+.hologram-exit { animation: hologramOut 0.6s ease forwards; }
+.hologram-enter { animation: hologramIn 0.6s ease forwards; }
+
+/* --- TIPO DO POKÉMON --- */
+.pokemon-tipo {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  margin: 2px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
