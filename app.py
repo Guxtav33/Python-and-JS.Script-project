@@ -7,7 +7,6 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-
 @app.route("/buscar", methods=["POST"])
 def buscar():
     name = request.form.get("nome", "").strip().lower()
@@ -36,7 +35,6 @@ def buscar():
         description = "Description not found."
         if desc_req.status_code == 200:
             desc_data = desc_req.json()
-
             for entry in desc_data.get("flavor_text_entries", []):
                 if entry["language"]["name"] == "en":
                     description = entry["flavor_text"].replace("\n", " ").replace("\f", " ")
@@ -49,7 +47,7 @@ def buscar():
             "descricao": description,
             "imagem": image,
             "hp": hp,
-            "nivel": level,
+            "nivel": level
         })
 
     except Exception as e:
@@ -58,5 +56,4 @@ def buscar():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    
+    app.run()
