@@ -32,7 +32,6 @@ def buscar():
             or ""
         )
 
-        # Description
         desc_req = requests.get(f"https://pokeapi.co/api/v2/pokemon-species/{poke_id}")
         description = "Description not found."
         if desc_req.status_code == 200:
@@ -60,3 +59,4 @@ def buscar():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
