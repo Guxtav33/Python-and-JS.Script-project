@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => pokemonImage.classList.remove("hologram-enter"), 600);
         pokemonAtual = data.id;
       } else {
-        descBox.innerHTML = `<p>${data.erro}</p>`;
+        descBox.innerHTML = `<p>${data.error}</p>`;
         bootText.style.display = "none";
         pokemonImage.classList.add("hidden");
       }
